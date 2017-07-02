@@ -28,7 +28,7 @@ def stabilize_video(media, shakiness=10):
         # Generate `transforms.crf` analysis of video
         if shakiness < 10:
             subprocess.call(["ffmpeg",
-                "-y",
+                "-y",  # Overwrite automatically
                 "-i",
                 m,
                 "-vf",
@@ -40,7 +40,7 @@ def stabilize_video(media, shakiness=10):
             ])
         else:
             subprocess.call(["ffmpeg",
-                "-y",
+                "-y",  # Overwrite automatically
                 "-i",
                 m,
                 "-vf",
@@ -54,7 +54,7 @@ def stabilize_video(media, shakiness=10):
 
         # Use `transforms.crf` to stabilize video
         subprocess.call(["ffmpeg",
-            "-y", # No overwrite check
+            "-y",  # Overwrite automatically
             "-i",
             m,
             "-vf",
@@ -70,7 +70,7 @@ def strip_metadata(media):
     """Strips metadata and logs remaining metadata."""
     for m in media:
         subprocess.call(["exiftool",
-            "v3",
+            "v3",  # Verbose logging
             "-all:all=",
             m
         ])
@@ -89,7 +89,7 @@ def get_metadata(media):
     """
     for m in media:
         metadata = subprocess.check_output(["exiftool",
-            "-a",
+            "-duplicates",
             m
         ])
 
