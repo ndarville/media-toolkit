@@ -13,7 +13,8 @@ def convert(media):
             "-y" if settings.overwrite else "-n",
             "-i",
             m,
-            settings.destination + ntpath.basename(m).split(".")[0] + "." + settings.extension
+            settings.destination \
+                + ntpath.basename(m).split(".")[0] + "." + settings.extension
         ])
 
 @prepare_input
@@ -58,7 +59,8 @@ def stabilize_video(media, shakiness=10):
             "-vf",
             "vidstabtransform=smoothing=30:input='" \
                 + settings.temp_dir + "transforms.trf'",
-            settings.destination + ntpath.basename(m).split(".")[0] + ".stable." + ntpath.basename(m).split(".")[1]
+            settings.destination + ntpath.basename(m).split(".")[0] \
+                + ".stable." + ntpath.basename(m).split(".")[1]
         ])
 
 
