@@ -33,7 +33,7 @@ def stabilize_video(media, shakiness=10):
                 m,
                 "-vf",
                 "vidstabdetect=result=" \
-                    + settings.temp_dir + "'transforms.crf'",
+                    + settings.temp_dir + "transforms.crf",
                 "-f",
                 "null",
                 "-"
@@ -45,7 +45,7 @@ def stabilize_video(media, shakiness=10):
                 m,
                 "-vf",
                 "vidstabdetect=result=" \
-                    + settings.temp_dir + "'transforms.crf'" \
+                    + settings.temp_dir + "transforms.crf" \
                     + ":shakiness=" + str(shakiness) + ":accuracy=15",
                 "-f",
                 "null",
@@ -59,7 +59,7 @@ def stabilize_video(media, shakiness=10):
             m,
             "-vf",
             "vidstabtransform=smoothing=30:input='" \
-                + settings.temp_dir + "transforms.crf'",
+                + settings.temp_dir + "transforms.crf",
             settings.destination + ntpath.basename(m).split(".")[0] \
                 + ".stable." + ntpath.basename(m).split(".")[1]
         ])
