@@ -95,9 +95,3 @@ def get_metadata(media):
 
         with open(settings.destination + ntpath.basename(m) + ".txt", "wb") as text_file:
             text_file.write(metadata)
-
-
-# convert("./samples/foo.mkv")
-# get_metadata("./samples/foo.mkv")
-# strip_metadata("./samples/foo.png")
-stabilize_video("./samples/foo.mkv", shakiness=5)
