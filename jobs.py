@@ -25,7 +25,7 @@ def stabilize_video(media, shakiness=10):
     Installation instructions at <git.io/vQ0SA>.
     """
     for m in media:
-        # Generate `transforms.trf` analysis of video
+        # Generate `transforms.crf` analysis of video
         if shakiness < 10:
             subprocess.call(["ffmpeg",
                 "-y",
@@ -52,14 +52,14 @@ def stabilize_video(media, shakiness=10):
                 "-"
             ])
 
-        # Use `transforms.trf` to stabilize video
+        # Use `transforms.crf` to stabilize video
         subprocess.call(["ffmpeg",
             "-y", # No overwrite check
             "-i",
             m,
             "-vf",
             "vidstabtransform=smoothing=30:input='" \
-                + settings.temp_dir + "transforms.trf'",
+                + settings.temp_dir + "transforms.crf'",
             settings.destination + ntpath.basename(m).split(".")[0] \
                 + ".stable." + ntpath.basename(m).split(".")[1]
         ])
