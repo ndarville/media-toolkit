@@ -97,7 +97,7 @@ def get_metadata(media):
             text_file.write(metadata)
 
 
-convert("./samples/foo.mkv")
-get_metadata("./samples/foo.mkv")
-strip_metadata("./samples/foo.png")
+# convert("./samples/foo.mkv")
+# get_metadata("./samples/foo.mkv")
+# strip_metadata("./samples/foo.png")
 stabilize_video("./samples/foo.mkv")
