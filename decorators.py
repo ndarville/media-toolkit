@@ -10,7 +10,7 @@ def convert(media):
     """Convert input to another file type."""
     for m in media:
         subprocess.call(["ffmpeg",
-            "-y" if settings.destination else "-n",
+            "-y" if settings.overwrite else "-n",
             "-i",
             m,
             settings.destination + ntpath.basename(m).split(".")[0] + "." + settings.extension
