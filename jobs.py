@@ -18,7 +18,7 @@ def convert(media):
         ])
 
 @prepare_input
-def stabilize_video(media, shakiness=10):
+def stabilize_video(media, shakiness=5):
     """
     Stabilizes video and takes a 1-10 shakiness argument.
 
@@ -100,4 +100,4 @@ def get_metadata(media):
 # convert("./samples/foo.mkv")
 # get_metadata("./samples/foo.mkv")
 # strip_metadata("./samples/foo.png")
-stabilize_video("./samples/foo.mkv")
+stabilize_video("./samples/foo.mkv", shakiness=5)
