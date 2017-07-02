@@ -23,3 +23,4 @@ brew "ffmpeg", args: [
     "--with-xz",
     "--with-zimg"
 ]
+brew "vid.stab" # https://git.io/vQ0SA

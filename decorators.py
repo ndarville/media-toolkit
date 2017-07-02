@@ -16,6 +16,51 @@ def convert(media):
             settings.destination + ntpath.basename(m).split(".")[0] + "." + settings.extension
         ])
 
+@prepare_input
+def stabilize_video(media, shakiness=10):
+    """
+    Stabilizes video and takes a 1-10 shakiness argument.
+
+    Installation instructions at <git.io/vQ0SA>.
+    """
+    for m in media:
+        # Generate `transforms.trf` analysis of video
+        if shakiness < 10:
+            subprocess.call(["ffmpeg",
+                "-y",
+                "-i",
+                m,
+                "-vf",
+                "vidstabdetect",
+                "-f",
+                "null",
+                "-"
+            ])
+        else:
+            subprocess.call(["ffmpeg",
+                "-y",
+                "-i",
+                m,
+                "-vf",
+                "vidstabdetect=result=" \
+                    + settings.temp_dir + "'transforms.crf'" \
+                    + ":shakiness=" + str(shakiness) + ":accuracy=15",
+                "-f",
+                "null",
+                "-"
+            ])
+
+        # Use `transforms.trf` to stabilize video
+        subprocess.call(["ffmpeg",
+            "-y", # No overwrite check
+            "-i",
+            m,
+            "-vf",
+            "vidstabtransform=smoothing=30:input='" \
+                + settings.temp_dir + "transforms.trf'",
+            settings.destination + ntpath.basename(m).split(".")[0] + ".stable." + ntpath.basename(m).split(".")[1]
+        ])
+
 
 @prepare_input
 def strip_metadata(media):
@@ -52,3 +97,4 @@ def get_metadata(media):
 convert("./samples/foo.mkv")
 get_metadata("./samples/foo.mkv")
 strip_metadata("./samples/foo.png")
+stabilize_video("./samples/foo.mkv")
