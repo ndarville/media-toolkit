@@ -32,7 +32,8 @@ def stabilize_video(media, shakiness=10):
                 "-i",
                 m,
                 "-vf",
-                "vidstabdetect",
+                "vidstabdetect=result=" \
+                    + settings.temp_dir + "'transforms.crf'",
                 "-f",
                 "null",
                 "-"
